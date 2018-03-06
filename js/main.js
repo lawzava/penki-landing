@@ -204,9 +204,9 @@ $(document).ready(function() {
 			// change checboxes
 			if($('.option2').hasClass('active')){
 				$('.box2 .checkboxes input#ti').iCheck('check');
-				$('.box2 .checkboxes input#ni').iCheck('check');
+				$('.box2 .checkboxes input#ni').iCheck('uncheck');
 				$('.box2 .checkboxes input#pkr').iCheck('check');
-				$('.box2 .checkboxes input#spf').iCheck('uncheck');
+				$('.box2 .checkboxes input#spf').iCheck('check');
 				$('.box2 .checkboxes input#si').iCheck('uncheck');
 			} else {
 				$('.box2 .checkboxes input#ti').iCheck('check');
@@ -245,9 +245,9 @@ $(document).ready(function() {
 			} else {
 				$('.box2 .checkboxes input#ti').iCheck('check');
 				$('.box2 .checkboxes input#ni').iCheck('check');
-				$('.box2 .checkboxes input#pkr').iCheck('check');
+				$('.box2 .checkboxes input#pkr').iCheck('uncheck');
 				$('.box2 .checkboxes input#spf').iCheck('uncheck');
-				$('.box2 .checkboxes input#si').iCheck('uncheck');
+				$('.box2 .checkboxes input#si').iCheck('check');
 			}
 		}
 	})

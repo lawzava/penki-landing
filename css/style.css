@@ -340,6 +340,7 @@ form.buttons input[type="text"] {
 }
 .services img {
     max-width: 66px;
+    width: 100%;
 }
 .services ul {
     padding: 0;
@@ -376,6 +377,7 @@ form.buttons input[type="text"] {
     color: #b6b6b6;
     font-size: 20px;
     border-bottom: 2px dotted #b6b6b6;
+    cursor: pointer;
 }
 .services .btn {
     margin-top: 30px;
@@ -395,7 +397,7 @@ form.buttons input[type="text"] {
     padding: 70px 0 70px 0;   
 }
 .footer h2 {
-    color: #434a54;
+    color: #000000;
     font-size: 35px;
     font-weight: 600;
     margin-bottom: 25px;
@@ -496,7 +498,7 @@ form.buttons input[type="text"] {
     font-size: 18px;
     font-weight: 600;
     color: #c2c2c2;
-    display: block;
+    display: none;
 }
 
 .checkboxes .checked.disabled + label {
@@ -652,4 +654,17 @@ input {
     -moz-user-select: auto!important;
     -ms-user-select: auto!important;
     user-select: auto!important;
+}
+
+#logo .services {
+    padding: 20px 0;
+}
+#logo .services:before {
+    display: none;
+}
+#logo .modal-body {
+    padding: 35px 0 30px 0;
+}
+#logo .modal-content {
+    padding: 0 15px;
 }
