@@ -657,7 +657,10 @@ input {
 }
 
 #logo .services {
-    padding: 20px 0;
+    margin: 20px 0;
+    padding: 0;
+    max-height: 325px;
+    overflow: auto;
 }
 #logo .services:before {
     display: none;
