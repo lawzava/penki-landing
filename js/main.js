@@ -20,6 +20,12 @@ $(document).ready(function() {
 	    checkboxClass: 'icheckbox_penki'
 	});
 
+	$('.show-more').on('click', function(e){
+		e.preventDefault();
+		$(this).next().removeClass('hidden');
+		$(this).remove();
+	});
+
 	var items_option1 = [
 		[7.79, 11.79, 17.79],
 		[8.79, 12.79, 18.79],
