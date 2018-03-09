@@ -20,179 +20,78 @@ $(document).ready(function() {
 	    checkboxClass: 'icheckbox_penki'
 	});
 
+	var items_option1 = [
+		[7.79, 11.79, 17.79],
+		[8.79, 12.79, 18.79],
+		[13.0, 18.00, 23.00]
+	];
+
+	var items_option2 = [
+		[14.79, 18.79, 24.79],
+		[15.79, 19.79, 25.79],
+		[20.00, 25.00, 30.00]
+	];
+
+	var current_option = '1';
+	var wifi_price = $('#wifi-irange').attr("data-price");
+
+	$('.box3 .internetas_pack a').on('click', function(){
+		$('.box1 .checkboxes input').iCheck('uncheck');
+		$('.box3 .on .internetas_pack a').removeClass('active');
+		$(this).addClass('active');
+		var col1 = $(this).attr("data-matrix");
+		var col2 = $('.box3 .sutartis_pack a.active').attr("data-matrix");
+		
+		var current_price = '';
+		if($('.option1.active').length) {
+			current_price = items_option1[col1][col2];
+		} else {
+			current_price = items_option2[col1][col2];
+		}
+
+		current_price = parseFloat(current_price);
+		current_price = current_price.toFixed(2);
+		$("#price").attr("data-price", current_price);
+
+		var arr = current_price.split(".");
+		var lastVal = arr.pop();
+		var firstVal = arr.join(".");
+		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
+
+	});
+
 	$('.box3 .sutartis_pack a').on('click', function(){
 		var idx_ab = $(this).index();
 		
 		if (idx_ab==0) { //24 months
-			$('.box1 .checkboxes input').attr("data-price","2.5");
-			$('.checkboxes label span').text('(+2,50 €/mėn.)'); 
+			wifi_price = '2.5';
 		} else if (idx_ab==1) {//12 months
-			$('.box1 .checkboxes input').attr("data-price","3.75");
-			$('.checkboxes label span').text('(+3,75 €/mėn.)');
+			wifi_price = '3.75';
 		} else {//unlimited
-		    $('.box1 .checkboxes input').attr("data-price","4.95");
-			$('.checkboxes label span').text('(+4,95 €/mėn.)');
-		}
-	});
-
-  	$('.option1').on('click', function(){
-		$('.box4 a').removeClass('active');
-
-		$(this).addClass('active');
-		// $('.box2 .checkboxes input').iCheck('disable');
-		// $('.box2 .checkboxes input').iCheck('uncheck');
-		// $('.box2 .checkboxes input.internetas').iCheck('disabled');
-		// $('.box2 .checkboxes input.internetas').iCheck('check');
-		$('.box2 .checkboxes input#ti').iCheck('check');
-		$('.box2 .checkboxes input#ni').iCheck('uncheck');
-		$('.box2 .checkboxes input#pkr').iCheck('uncheck');
-		$('.box2 .checkboxes input#spf').iCheck('uncheck');
-		$('.box2 .checkboxes input#si').iCheck('uncheck');
-
-		$('.box3 .internetas').removeClass('on');
-		$('.box3 .internetas.single').addClass('on');
-
-		$('.box1 .checkboxes input').iCheck('uncheck');
-
-		var default_price = $(this).attr("data-price");
-		// set attribute
-	    $("#price").attr("data-price", default_price);
-		var arr = default_price.split(".");
-		var lastVal = arr.pop();
-		var firstVal = arr.join(".");
-		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-
-		$('.box3 a').removeClass('active');
-		$('.box3 .on .internetas_pack a').first().addClass('active');
-		$('.box3 .on .sutartis_pack a').first().addClass('active');
-
-	});
-
-	$('.option2').on('click', function(){
-
-		$('.box4 a').removeClass('active');
-
-		$(this).addClass('active');
-		//$('.box2 .checkboxes input').iCheck('disabled');
-		//$('.box2 .checkboxes input').iCheck('check');
-		$('.box2 .checkboxes input#ti').iCheck('check');
-		$('.box2 .checkboxes input#ni').iCheck('check');
-		$('.box2 .checkboxes input#pkr').iCheck('check');
-		$('.box2 .checkboxes input#spf').iCheck('uncheck');
-		$('.box2 .checkboxes input#si').iCheck('uncheck');
-
-		$('.box3 .internetas').removeClass('on');
-		$('.box3 .internetas.tv').addClass('on');
-
-		$('.box1 .checkboxes input').iCheck('uncheck');
-
-		var default_price = $(this).attr("data-price");
-		// set attribute
-	    $("#price").attr("data-price", default_price);
-		var arr = default_price.split(".");
-		var lastVal = arr.pop();
-		var firstVal = arr.join(".");
-		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-
-		$('.box3 a').removeClass('active');
-		$('.box3 .on .internetas_pack a:first-child').first().click();
-		$('.box3 .on .sutartis_pack a:first-child').first().click();
-
-	});
-
-	$('.box1 .checkboxes').on('ifChecked', function (event) {
-	    var current_price = parseFloat($('#price').attr("data-price"));
-	    var next_price = current_price + parseFloat($('.box1 .checkboxes input').attr("data-price"));
-	    var next_price = next_price.toFixed(2);
-	    // set attribute
-	    $("#price").attr("data-price", next_price);
-		//change price
-	    var arr = next_price.split(".");
-		var lastVal = arr.pop();
-		var firstVal = arr.join(".");
-		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-	});
-	$('.box1 .checkboxes').on('ifUnchecked', function (event) {
-	    var current_price = parseFloat($('#price').attr("data-price"));
-	    var next_price = current_price - parseFloat($('.box1 .checkboxes input').attr("data-price"));
-	    var next_price = next_price.toFixed(2);
-	    // set attribute
-	    $("#price").attr("data-price", next_price);
-		//change price
-	    var arr = next_price.split(".");
-		var lastVal = arr.pop();
-		var firstVal = arr.join(".");
-		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-	});
-
-	$('.box3 .internetas_pack a').on('click', function(){
-		$('.box3 .on .internetas_pack a').removeClass('active');
-		$(this).addClass('active');
-		var current_price = $('.box4 .btn.active').attr("data-price");
-		if ( $('.box1 .icheckbox_penki' ).hasClass( "checked" ) ) {
-			// do nothing
-		} else {
-			current_price = current_price - parseFloat($('.box1 .checkboxes input').attr("data-price"));
+		    wifi_price = '4.95';
 		}
 
-		current_price = parseFloat(current_price) + parseFloat($(this).attr("data-price")) + parseFloat($('.box3 .on .sutartis_pack a.active').attr("data-price"));
-		current_price = current_price.toFixed(2);
-
-		// set attribute
-	    $("#price").attr("data-price", current_price);
-		var arr = current_price.split(".");
-		var lastVal = arr.pop();
-		var firstVal = arr.join(".");
-		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-
-	});
-
-	$('.box3 .sutartis_pack a').on('click', function(){
+		$('.box1 .checkboxes input').iCheck('uncheck');
 		$('.box3 .on .sutartis_pack a').removeClass('active');
 		$(this).addClass('active');
-		var current_price = $('.box4 .btn.active').attr("data-price");
-		if ( $('.box1 .icheckbox_penki' ).hasClass( "checked" ) ) {
-			// do nothing
+		var col1 = $(this).attr("data-matrix");
+		var col2 = $('.box3 .internetas_pack a.active').attr("data-matrix");
+
+		var current_price = '';
+		if($('.option1.active').length) {
+			current_price = items_option1[col1][col2];
 		} else {
-			current_price = current_price - parseFloat($('.box1 .checkboxes input').attr("data-price"));
+			current_price = items_option2[col1][col2];
 		}
 
-		current_price = parseFloat(current_price) + parseFloat($(this).attr("data-price")) + parseFloat($('.box3 .on .internetas_pack a.active').attr("data-price"));
+		current_price = parseFloat(current_price);
 		current_price = current_price.toFixed(2);
+		$("#price").attr("data-price", current_price);
 
-		// set attribute
-	    $("#price").attr("data-price", current_price);
 		var arr = current_price.split(".");
 		var lastVal = arr.pop();
 		var firstVal = arr.join(".");
 		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
-
-	});
-
-	$('.box3 .on .internetas_pack a:first-child').first().click();
-	$('.box3 .on .sutartis_pack a:first-child').first().click();
-
-	$('.show-more').on('click', function(e){
-		e.preventDefault();
-		$(this).next().removeClass('hidden');
-		$(this).remove();
-	});
-
-	//$("#first, #second, #third, #fourth").validate({
-	$('form').each(function() {
-		$(this).validate({
-			errorClass: 'error help-inline',
-		    validClass: 'success',
-		    errorPlacement: function(error,element) {
-		    	return true;
-			},
-		    highlight: function(element, errorClass, validClass) {
-		      $(element).addClass(errorClass).removeClass(validClass);
-		    },
-		    unhighlight: function(element, errorClass, validClass) {
-		      $(element).removeClass(errorClass).addClass(validClass);
-		    }
-		});
 	});
 
 	$('.internetas_pack a').on('click', function(){
@@ -250,6 +149,80 @@ $(document).ready(function() {
 				$('.box2 .checkboxes input#si').iCheck('check');
 			}
 		}
-	})
+	});
+
+
+	$('.option1').on('click', function(){
+		$('.box4 a').removeClass('active');
+		$(this).addClass('active');
+
+		$('.box2 .checkboxes input#ti').iCheck('check');
+		$('.box2 .checkboxes input#ni').iCheck('uncheck');
+		$('.box2 .checkboxes input#pkr').iCheck('uncheck');
+		$('.box2 .checkboxes input#spf').iCheck('uncheck');
+		$('.box2 .checkboxes input#si').iCheck('uncheck');
+
+		$('.box3 .internetas').removeClass('on');
+		$('.box3 .internetas.single').addClass('on');
+
+		$('.box1 .checkboxes input').iCheck('uncheck');
+
+		$('.box3 a').removeClass('active');
+		$('.box3 .on .internetas_pack a').first().addClass('active');
+		$('.box3 .on .sutartis_pack a').first().addClass('active');
+
+		$('.box3 .on .internetas_pack a:first-child').first().click();
+		$('.box3 .on .sutartis_pack a:first-child').first().click();
+
+	});
+
+	$('.option2').on('click', function(){
+		$('.box4 a').removeClass('active');
+		$(this).addClass('active');
+
+		$('.box2 .checkboxes input#ti').iCheck('check');
+		$('.box2 .checkboxes input#ni').iCheck('check');
+		$('.box2 .checkboxes input#pkr').iCheck('check');
+		$('.box2 .checkboxes input#spf').iCheck('uncheck');
+		$('.box2 .checkboxes input#si').iCheck('uncheck');
+
+		$('.box3 .internetas').removeClass('on');
+		$('.box3 .internetas.tv').addClass('on');
+
+		$('.box1 .checkboxes input').iCheck('uncheck');
+
+		$('.box3 a').removeClass('active');
+		$('.box3 .on .internetas_pack a:first-child').first().click();
+		$('.box3 .on .sutartis_pack a:first-child').first().click();
+
+		$('.box3 .on .internetas_pack a:first-child').first().click();
+		$('.box3 .on .sutartis_pack a:first-child').first().click();
+
+	});
+
+	$('.box1 .checkboxes').on('ifChecked', function (event) {
+	    var current_price = parseFloat($('#price').attr("data-price"));
+	    var next_price = current_price + parseFloat(wifi_price);
+	    var next_price = next_price.toFixed(2);
+	    // set attribute
+	    $("#price").attr("data-price", next_price);
+		//change price
+	    var arr = next_price.split(".");
+		var lastVal = arr.pop();
+		var firstVal = arr.join(".");
+		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
+	});
+	$('.box1 .checkboxes').on('ifUnchecked', function (event) {
+	    var current_price = parseFloat($('#price').attr("data-price"));
+	    var next_price = current_price - parseFloat(wifi_price);
+	    var next_price = next_price.toFixed(2);
+	    // set attribute
+	    $("#price").attr("data-price", next_price);
+		//change price
+	    var arr = next_price.split(".");
+		var lastVal = arr.pop();
+		var firstVal = arr.join(".");
+		$("#price").html(firstVal+'<sup>'+lastVal+'</sup>');
+	});
   
 });
